@@ -332,14 +332,17 @@ export const getProductsByCategory = async (req, res, next) => {
     if (!merchant) {
       return next(createHttpError(404, "Merchant not found"));
     }
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skipCount = (page - 1) * limit;
-    const count = await Product.countDocuments({ merchantCode });
-    const totalPages = Math.ceil(count / limit);
     let categoryName = formatText(
       category.charAt(0).toUpperCase() + category.slice(1)
     );
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skipCount = (page - 1) * limit;
+    const count = await Product.countDocuments({
+      merchantCode,
+      category: { $regex: categoryName, $options: "i" },
+    });
+    const totalPages = Math.ceil(count / limit);
     const products = await Product.find({
       merchantCode: merchantCode,
       category: { $regex: categoryName, $options: "i" },
