@@ -25,12 +25,13 @@ cloudinary.config({
   secure: true,
 });
 const corsOptions = {
-  origin: [
-    "https://teem-client.vercel.app",
-    "https://teem-seller-chi.vercel.app",
-    "http://localhost:5173",
-    "http://localhost:5174",
-  ], // Allows requests from all domains. Specify actual domain in production for security.
+  // origin: [
+  //   "https://teem-client.vercel.app",
+  //   "https://teem-seller-chi.vercel.app",
+  //   "http://localhost:5173",
+  //   "http://localhost:5174",
+  //   "https://eshop-client-eight.vercel.app/"
+  // ], // Allows requests from all domains. Specify actual domain in production for security.
   optionsSuccessStatus: 200, // Ensure compatibility by setting OPTIONS success status to 200 OK.
   methods: ["GET", "POST", "PATCH", "DELETE"],
   credentials: true,
